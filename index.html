@@ -3,27 +3,99 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <title>Twittler</title>
+    <style>
+    body{
+      text-align: center;
+    }
+    span {
+    width: 100px;
+    height: 100px;
+    overflow: scroll;
+}
+    </style>
   </head>
   <body>
     <script>
     //loop schedule next tweet?
     //display next tweet via and remove oldest tweet
+      $(document).ready(function(){
+        var $body = $('body');
+        $body.html('');
+        $("<h1>Twittler</h1>").appendTo($body); 
+        var $hit = $('<h2><button>Refresh Tweeets</button></h2>')
+        $hit.appendTo($body)
+        var count = 0;
+
+
+        var index = streams.home.length - 1;
+        while(index >= 0){
+          var tweet = streams.home[index];
+          var $tweet = $('<ul></ul>');
+          $tweet.text('@' + tweet.user + ': ' + tweet.message + " - " + tweet.created_at);
+          $tweet.appendTo($body);
+          index -= 1;
+          count++
+        }
+        var Check = function(){
+          alert(count + " " + streams.home.length)
+          while(streams.home.length > count){
+            var newTweets = streams.home[count];
+            var $newTweets = $('<ul></ul>');
+            $newTweets.text('@' + newTweets.user + ': ' + newTweets.message + " - " + newTweets.created_at);
+            $newTweets.appendTo($body);
+            count++;
+          }
+        }
+        $('button').on('click', function(){Check()})
+        });
+    </script>
+  </body>
+</html>
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jquery.js"></script>
+    <script src="data_generator.js"></script>
+    <style>
+    header {
+      text-align:center;
+      padding:15px;
+    }
+    </style>
+  </head>
+  <body>
+
+    <script>
 
       $(document).ready(function(){
         var $body = $('body');
         $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + " - " + tweet.created_at);
-          $tweet.appendTo($body);
-          index -= 1;
+        function display() {
+          var index = streams.home.length - 1;
+          var count = 10;
+          while(count >= 0){
+            var tweet = streams.home[index-count];
+            var $tweet = $('<div class="tweets"></div>');
+            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $tweet.appendTo($body);
+            count -= 1;
+          }
         }
 
+        
+        var show = '<header><button>Show tweets</button></header>';
+        $(show).appendTo($body);
+        display();
+        $('button').on('click', function() {
+          $(".tweets").remove();
+          display();
+          alert(streams.home.length);
+        });
       });
 
     </script>
   </body>
-</html>
+</html> !--> 
