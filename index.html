@@ -38,7 +38,6 @@
           count++
         }
         var Check = function(){
-          alert(count + " " + streams.home.length)
           while(streams.home.length > count){
             var newTweets = streams.home[count];
             var $newTweets = $('<ul></ul>');
@@ -52,50 +51,3 @@
     </script>
   </body>
 </html>
-<!--
-<!DOCTYPE html>
-<html>
-  <head>
-    <script src="jquery.js"></script>
-    <script src="data_generator.js"></script>
-    <style>
-    header {
-      text-align:center;
-      padding:15px;
-    }
-    </style>
-  </head>
-  <body>
-
-    <script>
-
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
-
-        function display() {
-          var index = streams.home.length - 1;
-          var count = 10;
-          while(count >= 0){
-            var tweet = streams.home[index-count];
-            var $tweet = $('<div class="tweets"></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message);
-            $tweet.appendTo($body);
-            count -= 1;
-          }
-        }
-
-        
-        var show = '<header><button>Show tweets</button></header>';
-        $(show).appendTo($body);
-        display();
-        $('button').on('click', function() {
-          $(".tweets").remove();
-          display();
-          alert(streams.home.length);
-        });
-      });
-
-    </script>
-  </body>
-</html> !--> 
