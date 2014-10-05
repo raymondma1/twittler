@@ -13,10 +13,12 @@
         $body.html('');
         $('<h1><img src = "topfont.png"/>').appendTo($body);
         var $hit = $('<h2><button>Refresh Tweeets</button></h2>')
+        var $shawn = $('<h3><button id ="shawn">shawndrost</button><button id ="sharks">sharksforcheap</button><button id ="mracus">mracus</button><button id= "doug">douglascalhoun</button></h3>')
         $hit.appendTo($body)
-        var count = 0;
+        $shawn.appendTo($body)
         var index = streams.home.length - 1;
         while(index >= 0){
+          var count=0;
           var tweet = streams.home[index];
           var $tweet = $('<ul></ul>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message + " - " + tweet.created_at);
@@ -25,6 +27,8 @@
           count++
         }
         var Check = function(){
+          $('ul').remove();
+          var count = 0;
           while(streams.home.length > count){
             var newTweets = streams.home[count];
             var $newTweets = $('<ul></ul>');
@@ -33,8 +37,24 @@
             count++;
           }
         }
-        $('button').on('click', function(){Check()})
-        });
+        var filterName = function(name){
+          //streams.users.shawndrost has all of shawndrost's tweets
+          $('ul').remove();
+          var newcount=0;
+          while(streams.users[name].length>newcount){
+            var userTweets = streams.users[name][newcount];
+            var $userTweets =$('<ul></ul>');
+            $userTweets.text('@' + userTweets.user + ':' + userTweets.message + "-" + userTweets.created_at);
+            $userTweets.appendTo($body);
+            newcount++;
+          }
+        }
+        $('h2').on('click', function(){Check()})
+        $("#shawn").on('click', function(){filterName("shawndrost")})
+        $("#sharks").on('click', function(){filterName("sharksforcheap")})
+        $("#mracus").on('click',function(){filterName("mracus")})
+        $("#doug").on('click',function(){filterName("douglascalhoun")})
+    });
     </script>
   </body>
 </html>
